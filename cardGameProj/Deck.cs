@@ -32,33 +32,43 @@ namespace cardGameProj
 
         public void Shuffle(int n)
         {
+            Random random = new Random();
+
             //Temporary lists
-            List<Card> list = new List<Card>();
-            List<Card> list2 = new List<Card>();
-            
-            //Shuffles n times
-            for(int y = 0; y<n; y++)
+            Stack<Card> s1 = new Stack<Card>();
+            Stack<Card> s2 = new Stack<Card>();
+
+            //Pops half of the cards to s1
+            for (int i = 0; i < Cards.Count()/2; i++)
             {
-                //Pops all of the cards to list
-                while (Cards != null)
-                {
-                    list.Add(Cards.Pop());
-                }
+                s1.Push(Cards.Pop());
+            }
 
-                //Adds half of the cards from list to list2
-                for (int i = 0; i < list.Count / 2; i++)
-                {
-                    list2.Add(list[i]);
-                    list.RemoveAt(i);
-                }
+            //Pops the rest of the cards to s2
+            for(int j=0; j < Cards.Count; j++)
+            {
+                s2.Push(Cards.Pop());
+            }
 
-                //Pushes the cards from list to the deck
-                for (int j = 0; j < list.Count; j++)
+            //Pushes randomly the cards back to the deck
+            while(s1.Count() != 0)
+            {
+                for(int x = 0; x < random.Next(s1.Count()); x++)
                 {
-                    Cards.Push(list[j]);
-                    Cards.Push(list2[j]);
+                    Cards.Push(s1.Pop());
                 }
             }
+
+            //Pushes the rest of the cards back to the deck
+            while (s2.Count() != 0)
+            {
+                for (int x = 0; x < random.Next(s2.Count()); x++)
+                {
+                    Cards.Push(s2.Pop());
+                }
+            }
+
+
         }
 
         public Card Draw()
