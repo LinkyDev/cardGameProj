@@ -8,7 +8,7 @@ namespace cardGameProj
 {
     class Deck
     {
-        private Stack<Card> Cards;  
+        private Stack<Card> Cards;
 
         public Deck()
         {
@@ -19,11 +19,11 @@ namespace cardGameProj
         {
             Deck deck = new Deck();
 
-            for(int i=2; i<15; i++)
+            for (int i = 2; i < 15; i++)
             {
-                for(int j=0; j<4; j++)
+                for (int j = 0; j < 4; j++)
                 {
-                    deck.Push(new Card(i, (CardSuit) j));
+                    deck.Push(new Card(i, (CardSuit)j));
                 }
             }
 
@@ -39,28 +39,28 @@ namespace cardGameProj
             Stack<Card> s2 = new Stack<Card>();
 
             //Pops half of the cards to s1
-            for (int i = 0; i < Cards.Count()/2; i++)
+            for (int i = 0; i < Cards.Count() / 2; i++)
             {
                 s1.Push(Cards.Pop());
             }
 
             //Pops the rest of the cards to s2
-            for(int j=0; j < Cards.Count; j++)
+            for (int j = 0; j < Cards.Count; j++)
             {
                 s2.Push(Cards.Pop());
             }
 
             //Pushes randomly the cards back to the deck
-            while(s1.Count() != 0)
+            while (s1.Count() > 0)
             {
-                for(int x = 0; x < random.Next(s1.Count()); x++)
+                for (int x = 0; x < random.Next(s1.Count()); x++)
                 {
                     Cards.Push(s1.Pop());
                 }
             }
 
             //Pushes the rest of the cards back to the deck
-            while (s2.Count() != 0)
+            while (s2.Count() > 0)
             {
                 for (int x = 0; x < random.Next(s2.Count()); x++)
                 {
@@ -68,6 +68,51 @@ namespace cardGameProj
                 }
             }
 
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void RealisticShuffle()
+        { 
+            Stack<Card> s1 = new Stack<Card>();
+            Stack<Card> s2 = new Stack<Card>();
+            Random rnd = new Random();
+
+            int rand = rnd.Next(Cards.Count());
+
+            for(int i = 0; i < rand; i++)
+            {
+                s1.Push(Cards.Pop());
+            }
+
+            for(int j = 0; j < Cards.Count(); j++)
+            {
+                s2.Push(Cards.Pop());
+            }
+
+            while(s1.Count() > 0 && s2.Count() > 0)
+            {
+                Cards.Push(s1.Pop());
+                Cards.Push(s2.Pop());
+            }
+
+            if(s1.Count() != 0)
+            {
+                while(s1.Count() > 0)
+                {
+                    Cards.Push(s1.Pop());
+                }
+            }
+
+            if (s2.Count() != 0)
+            {
+                while (s2.Count() > 0)
+                {
+                    Cards.Push(s2.Pop());
+                }
+            }
 
         }
 
