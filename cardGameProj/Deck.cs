@@ -8,66 +8,82 @@ namespace cardGameProj
 {
     class Deck
     {
-        public Card[] Cards = new Card[51];
-        public Card TopCard;
+        private Stack<Card> Cards;  
 
         public Deck()
         {
-            for(int i = 0; i<51; i++)
+            Cards = new Stack<Card>();
+        }
+
+        public static void Create()
+        {
+            Deck deck = new Deck();
+
+            for(int i=2; i<15; i++)
             {
-                for(int j = 2; j<15; j++)
-                {
-                    Card CardSpade = new Card(j, CardSuit.Spade);
-                    Cards[i] = CardSpade;
+                Card CardSpade = new Card(i, CardSuit.Spade);
+                deck.Push(CardSpade);
 
-                    Card CardDiamond = new Card(j, CardSuit.Diamond);
-                    Cards[i+13] = CardDiamond;
+                Card CardDiamond = new Card(i, CardSuit.Diamond);
+                deck.Push(CardDiamond);
 
-                    Card CardClub = new Card(j, CardSuit.Club);
-                    Cards[i+(13*2)] = CardClub;
+                Card CardClub = new Card(i, CardSuit.Club);
+                deck.Push(CardClub);
 
-                    Card CardHeart = new Card(j, CardSuit.Heart);
-                    Cards[i+(13*3)] = CardHeart;
-                }
+                Card CardHeart = new Card(i, CardSuit.Heart);
+                deck.Push(CardHeart);
             }
         }
 
-        public void Shuffle()
+        public void Shuffle(int n)
         {
-            Random rnd = new Random();
-
-            Card[] arr = new Card[51];
-            int temp;
-
-            for(int i=0; i<arr.Length; i++)
+            //Temporary lists
+            List<Card> list = new List<Card>();
+            List<Card> list2 = new List<Card>();
+            
+            //Shuffles n times
+            for(int y = 0; y<n; y++)
             {
-                arr[i] = Cards[i];
-                Cards[i] = null;
-            }
-
-            for(int j=0; j<arr.Length; j++)
-            {
-                temp = rnd.Next(Cards.Length+1);
-                if(Cards[temp] != null)
+                //Pops all of the cards to list
+                while (Cards != null)
                 {
-                    Cards[temp] = arr[j];
+                    list.Add(Cards.Pop());
+                }
+
+                //Adds half of the cards from list to list2
+                for (int i = 0; i < list.Count / 2; i++)
+                {
+                    list2.Add(list[i]);
+                    list.RemoveAt(i);
+                }
+
+                //Pushes the cards from list to the deck
+                for (int j = 0; j < list.Count; j++)
+                {
+                    Cards.Push(list[j]);
+                    Cards.Push(list2[j]);
                 }
             }
-
-            this.TopCard = Cards[0];
         }
 
         public Card Draw()
         {
-            Card temp = this.TopCard;
-
-            for(int i=0; i<Cards.Length-1; i++)
-            {
-                Cards[i] = Cards[i + 1];
-            }
-
-            return temp;
+            return Cards.Pop();
         }
 
+        public void Push(Card card)
+        {
+            this.Cards.Push(card);
+        }
+
+        public Card Pop()
+        {
+            return this.Cards.Pop();
+        }
+
+        public Card Peek()
+        {
+            return this.Cards.Peek();
+        }
     }
 }
