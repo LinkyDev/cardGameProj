@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{86D00B3D-1F77-4B34-8CDF-893F67EC773A}</ProjectGuid>
+    <ProjectGuid>{6AE18BFE-9AD5-4E64-A869-A78B12FE0440}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>cardGameProj</RootNamespace>
-    <AssemblyName>cardGameProj</AssemblyName>
+    <RootNamespace>Deck</RootNamespace>
+    <AssemblyName>Deck</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,9 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Card.cs" />
-    <Compile Include="Class1.cs" />
-    <Compile Include="Deck.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
