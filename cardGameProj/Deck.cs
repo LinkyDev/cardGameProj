@@ -15,24 +15,19 @@ namespace cardGameProj
             Cards = new Stack<Card>();
         }
 
-        public static void Create()
+        public static Deck CreateNewDeck()
         {
             Deck deck = new Deck();
 
             for(int i=2; i<15; i++)
             {
-                Card CardSpade = new Card(i, CardSuit.Spade);
-                deck.Push(CardSpade);
-
-                Card CardDiamond = new Card(i, CardSuit.Diamond);
-                deck.Push(CardDiamond);
-
-                Card CardClub = new Card(i, CardSuit.Club);
-                deck.Push(CardClub);
-
-                Card CardHeart = new Card(i, CardSuit.Heart);
-                deck.Push(CardHeart);
+                for(int j=0; j<4; j++)
+                {
+                    deck.Push(new Card(i, (CardSuit) j));
+                }
             }
+
+            return deck;
         }
 
         public void Shuffle(int n)
